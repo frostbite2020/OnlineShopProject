@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Persistence\Migrations\20210414041747_Migration2.cs" />
+    <Compile Remove="Persistence\Migrations\20210414041747_Migration2.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20210415030315_Migration5.cs" />
+    <Compile Remove="Persistence\Migrations\20210415030315_Migration5.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20210416025444_Migration7.cs" />
+    <Compile Remove="Persistence\Migrations\20210416025444_Migration7.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20210416080933_Migration10.cs" />
+    <Compile Remove="Persistence\Migrations\20210416080933_Migration10.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20210416081123_Migration10.cs" />
+    <Compile Remove="Persistence\Migrations\20210416081123_Migration10.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
+
+</Project>
