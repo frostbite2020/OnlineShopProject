@@ -1,5 +1,4 @@
-﻿using Domain.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Application.Transactions.Queries.GetTransaction
 {

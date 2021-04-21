@@ -2,22 +2,24 @@
 using Domain.Entities;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Stores.Commands.CreateStore
 {
-    public class CreateStoreCommand : IRequest<int>
+    public class CreateStoreCommand : IRequest<string>
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Address { get; set; }
-        public string Contact { get; set; }
+        public int UserPropertyId { get; set; }
+        public string NPWP { get; set; }
+        public string IdCardNumber { get; set; }
+        public DateTime DateRequest { get; set; }
+        public string StoreName { get; set; }
+        public string StoreDescription { get; set; }
+        public string StoreAddress { get; set; }
+        public string StoreContact { get; set; }
     }
 
-    public class CreateStoreCommandHandler : IRequestHandler<CreateStoreCommand, int>
+    public class CreateStoreCommandHandler : IRequestHandler<CreateStoreCommand, string>
     {
         private readonly IApplicationDbContext _context;
         
@@ -26,18 +28,38 @@ namespace Application.Stores.Commands.CreateStore
             _context = context;
         }
 
-        public async Task<int> Handle(CreateStoreCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateStoreCommand request, CancellationToken cancellationToken)
         {
-            var entity = new Store
+
+            var now = DateTime.Now;
+
+            var entity = new NewSeller
             {
-                Name = request.Name,
-                Description = request.Description,
-                Address = request.Address,
-                Contact = request.Contact
+                UserPropertyId = request.UserPropertyId,
+                NPWP = request.NPWP,
+                IdCardNumber = request.IdCardNumber,
+                StoreName = request.StoreName,
+                StoreDescription = request.StoreDescription,
+                StoreAddress = request.StoreAddress,
+                StoreContact = request.StoreContact,
+                DateRequest = now
             };
 
-            _context.Stores.Add(entity);
-            return await _context.SaveChangesAsync(cancellationToken);
+            _context.NewSellers.Add(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return "Waiting for confirmation from admin";
+
+            /*            var entity = new Store
+                        {
+                            Name = request.Name,
+                            Description = request.Description,
+                            Address = request.Address,
+                            Contact = request.Contact
+                        };
+
+                        _context.Stores.Add(entity);
+                        return await _context.SaveChangesAsync(cancellationToken);*/
         }
     }
 }

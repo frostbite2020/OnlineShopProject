@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Application.Common.Models;
 using Domain.Entities;
 using MediatR;
 using System.Threading;
@@ -30,6 +31,7 @@ namespace Application.UserManagements.Commands.RegisterUser
             model.LastName = request.LastName;
             model.Username = request.Username;
             model.Email = request.Email;
+            model.Role = Role.User;
 
             var user = await _services.Create(model, request.Password, cancellationToken);
 

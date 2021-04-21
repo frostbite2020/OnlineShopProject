@@ -26,6 +26,9 @@ namespace Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CartIndexId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -35,16 +38,74 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(14,2)");
 
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartIndexId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CartIndex", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalCartPrice")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserPropertyId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("StoreId");
 
                     b.HasIndex("UserPropertyId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("CartIndexs");
+                });
+
+            modelBuilder.Entity("Domain.Entities.NewSeller", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateRequest")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IdCardNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NPWP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreContact")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserPropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserPropertyId");
+
+                    b.ToTable("NewSellers");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -136,8 +197,17 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IdCardNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NPWP")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserPropertyId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -217,6 +287,9 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
@@ -227,12 +300,30 @@ namespace Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Cart", b =>
                 {
-                    b.HasOne("Domain.Entities.Product", "Product")
+                    b.HasOne("Domain.Entities.CartIndex", "CartIndex")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("CartIndexId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.CartIndex", b =>
+                {
+                    b.HasOne("Domain.Entities.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.UserProperty", "UserProperty")
+                        .WithMany()
+                        .HasForeignKey("UserPropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.NewSeller", b =>
+                {
                     b.HasOne("Domain.Entities.UserProperty", "UserProperty")
                         .WithMany()
                         .HasForeignKey("UserPropertyId")
@@ -274,7 +365,7 @@ namespace Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.TransactionIndex", "TransactionIndex")
-                        .WithMany("Lists")
+                        .WithMany()
                         .HasForeignKey("TransactionIndexId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

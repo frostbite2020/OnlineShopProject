@@ -17,7 +17,7 @@ namespace OnlineShop.Controllers
         }
 
         [HttpPost]
-        public async Task<int> Add(CreateStoreCommand command)
+        public async Task<string> Add(CreateStoreCommand command)
         {
             return await Mediator.Send(command);
         }

@@ -1,10 +1,7 @@
 ﻿using Application.Transactions.Commands.CheckoutTransaction;
-using Application.Transactions.Commands.CreateTransaction;
-using Application.Transactions.Queries.GetTransaction;
+/*using Application.Transactions.Commands.CreateTransaction;
+*/using Application.Transactions.Queries.GetTransaction;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Controllers
@@ -12,7 +9,7 @@ namespace OnlineShop.Controllers
     [Route("transaction")]
     public class TransactionController : ApiControllerBase
     {
-        [HttpGet]
+        /*[HttpGet]
         public async Task<GetTransactionVm> Get([FromQuery]GetTransactionQuery query)
         {
             return await Mediator.Send(query);
@@ -28,6 +25,6 @@ namespace OnlineShop.Controllers
         public async Task<int> Checkout([FromQuery]CheckoutTransactionCommand command)
         {
             return await Mediator.Send(command);
-        }
+        }*/
     }
 }

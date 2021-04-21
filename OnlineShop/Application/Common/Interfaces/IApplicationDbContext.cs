@@ -11,10 +11,12 @@ namespace Application.Common.Interfaces
         DbSet<Store> Stores { get; set; }
         DbSet<Stock> Stocks { get; set; }
         DbSet<UserProperty> UserProperties { get; set; }
+        DbSet<CartIndex> CartIndexs { get; set; }
         DbSet<Cart> Carts { get; set; }
         DbSet<Transaction> Transactions { get; set; }
         DbSet<TransactionIndex> TransactionIndexs { get; set; }
         DbSet<PurchaseHistory> PurchaseHistories { get; set; }
+        DbSet<NewSeller> NewSellers { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

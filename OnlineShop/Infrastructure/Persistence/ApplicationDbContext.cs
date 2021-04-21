@@ -13,11 +13,12 @@ namespace Infrastructure.Persistence
         public DbSet<Product> Products { get; set; }
         public DbSet<Stock> Stocks{ get; set; }
         public DbSet<UserProperty> UserProperties { get; set; }
+        public DbSet<CartIndex> CartIndexs { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<PurchaseHistory> PurchaseHistories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionIndex> TransactionIndexs { get; set; }
-
+        public DbSet<NewSeller> NewSellers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
