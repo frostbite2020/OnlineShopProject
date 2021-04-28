@@ -7,7 +7,8 @@ Saya mengerjakan ini berdua dengan rekan saya dimana ia mengerjakan bagian front
 
 
 # Jika ingin Run Project
+- Project menggunakan Swagger untuk Dokumentasi API
 
 - Pastikan semua dependency sudah terinstall
 - Lalu debug project
-- Project menggunakan Swagger untuk Dokumentasi API
+- Akses http://localhost:5000/swagger/index.html
