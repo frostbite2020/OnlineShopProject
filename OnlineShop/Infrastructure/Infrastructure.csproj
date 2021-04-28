@@ -7,6 +7,10 @@
   <ItemGroup>
     <Compile Remove="Persistence\Migrations\20210421030016_Migration001.cs" />
     <Compile Remove="Persistence\Migrations\20210421030016_Migration001.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20210426041037_Migration010.cs" />
+    <Compile Remove="Persistence\Migrations\20210426041037_Migration010.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20210427145518_Migration012.cs" />
+    <Compile Remove="Persistence\Migrations\20210427145518_Migration012.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Persistence\Configurations\Seller\" />
   </ItemGroup>
 
 </Project>
